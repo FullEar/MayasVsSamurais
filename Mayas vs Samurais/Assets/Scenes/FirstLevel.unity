@@ -2775,7 +2775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1992203702}
-  releaseTime: 1
+  releaseTime: 0.1
   Cam: {fileID: 1250284119}
 --- !u!1 &2008755384
 GameObject:
