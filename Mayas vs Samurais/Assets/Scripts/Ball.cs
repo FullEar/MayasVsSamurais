@@ -5,8 +5,10 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public Rigidbody2D hook;
 
     public float releaseTime = 1.5f;
+    public float maxDragDistance = 2f;
 
     private bool isPressed = false;
 
@@ -16,8 +18,16 @@ public class Ball : MonoBehaviour
     {
 
         if (isPressed)
-        {          
-            rb.position = Cam.ScreenToWorldPoint(Input.mousePosition);
+        {
+            Vector2 mousePos = Cam.ScreenToWorldPoint(Input.mousePosition);
+
+            if (Vector3.Distance(mousePos, hook.position) > maxDragDistance)
+            {
+                rb.position = hook.position + (hook.position - hook.position).normalized * maxDragDistance;
+            }
+
+            else
+                 rb.position = mousePos;
         }
     }
 
@@ -40,5 +50,6 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(releaseTime);
 
         GetComponent<SpringJoint2D>().enabled = false;
+        this.enabled = false;
     }
 }
