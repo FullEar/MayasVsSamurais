@@ -10,11 +10,14 @@ public class Ball : MonoBehaviour
 
     private bool isPressed = false;
 
+    public Camera Cam;
+
     void Update()
     {
+
         if (isPressed)
-        {
-            rb.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        {          
+            rb.position = Cam.ScreenToWorldPoint(Input.mousePosition);
         }
     }
 
