@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
         if (EnemiesAlive <= 0)
         {
             Debug.Log("Level Won");
+            SceneManager.LoadScene("WinScene");
             
         }
         Destroy(gameObject);

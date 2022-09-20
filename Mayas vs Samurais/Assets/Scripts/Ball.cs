@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Ball : MonoBehaviour
 
     public float releaseTime = 1.5f;
     public float maxDragDistance = 2f;
+    public float waitingSeconds = 2f;
+
+    public GameObject nextBall;
 
     private bool isPressed = false;
 
@@ -51,5 +55,18 @@ public class Ball : MonoBehaviour
 
         GetComponent<SpringJoint2D>().enabled = false;
         this.enabled = false;
+
+        yield return new WaitForSeconds (waitingSeconds);
+        
+        if (nextBall != null)
+        {
+            nextBall.SetActive(true);
+        }
+        else
+        {
+            // Usar la funcion de abajo si se reinicia el nivel o se cambia de nivel para que no se dupliquen los enemigos en la escena.
+            //Enemy.EnemiesAlive = 0;
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 }
